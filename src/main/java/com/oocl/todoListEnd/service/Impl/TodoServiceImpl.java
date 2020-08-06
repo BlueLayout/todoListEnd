@@ -8,6 +8,8 @@ import com.oocl.todoListEnd.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class TodoServiceImpl implements TodoService {
 
@@ -24,6 +26,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    @Transactional
     public void deleteTodo(String id) {
         todoRepository.deleteById(id);
     }
