@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -49,5 +50,15 @@ public class TodoServiceTest {
 
         //then
         verify(todoRepository,times(1)).deleteById(any());
+    }
+
+    @Test
+    void should_return_todos_when_query_todos_given_() {
+        //given
+        when(todoRepository.findAll()).thenReturn(emptyList());
+        //when
+        todoService.queryTodos();
+        //then
+        verify(todoRepository,times(1)).findAll();
     }
 }
