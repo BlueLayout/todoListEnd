@@ -1,6 +1,8 @@
 package com.oocl.todoListEnd.service;
 
 
+import com.oocl.todoListEnd.constant.ExceptionMessage;
+import com.oocl.todoListEnd.exception.NoTodoDataException;
 import com.oocl.todoListEnd.mapper.TodoMapper;
 import com.oocl.todoListEnd.model.dto.TodoResponse;
 import com.oocl.todoListEnd.model.entity.Todo;
@@ -12,7 +14,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static java.util.Collections.emptyList;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -70,5 +72,16 @@ public class TodoServiceTest {
         todoService.updateTodo(new Todo());
         //then
         verify(todoRepository,times(1)).save(isA(Todo.class));
+    }
+
+    @Test
+    void should_throw_NoTodoDataException_when_update_todo_given_null() {
+        //given
+        when(todoRepository.save(any())).thenReturn(any());
+        //when
+        Throwable exception = assertThrows(NoTodoDataException.class,
+                ()->todoService.updateTodo(null));
+        //then
+        assertEquals(ExceptionMessage.NO_TODO_DATA.getMessage(),exception.getMessage());
     }
 }

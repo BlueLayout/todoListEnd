@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler({IllegalArgumentException.class,NullPointerException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
     String handleIllegalOperationException(Exception e) {
         return e.getMessage();
