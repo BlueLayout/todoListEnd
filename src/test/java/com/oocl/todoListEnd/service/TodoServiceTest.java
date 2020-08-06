@@ -61,4 +61,14 @@ public class TodoServiceTest {
         //then
         verify(todoRepository,times(1)).findAll();
     }
+
+    @Test
+    void should_return_todo_when_update_todo_given_todo() {
+        //given
+        when(todoRepository.save(any())).thenReturn(any());
+        //when
+        todoService.updateTodo(new Todo());
+        //then
+        verify(todoRepository,times(1)).save(isA(Todo.class));
+    }
 }

@@ -12,4 +12,6 @@ public interface TodoService {
     void deleteTodo(String id);
 
     List<TodoResponse> queryTodos();
+
+    void updateTodo(Todo todo);
 }

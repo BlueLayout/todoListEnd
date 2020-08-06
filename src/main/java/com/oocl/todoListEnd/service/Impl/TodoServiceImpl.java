@@ -38,4 +38,9 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.findAll().stream()
                 .map(todo -> todoMapper.todoToTodoResponse(todo)).collect(Collectors.toList());
     }
+
+    @Override
+    public void updateTodo(Todo todo) {
+
+    }
 }
