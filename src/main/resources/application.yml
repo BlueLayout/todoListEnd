@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: todoListEnd
+  datasource:
+    url: jdbc:h2:file:./h2/test
+    driver-class-name: org.h2.Driver
+  jpa:
+    database: h2
+    show-sql: true
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  flyway:
+    location:
+      classpath: db/migration
+server:
+  port: 7710
+
+
