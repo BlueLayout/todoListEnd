@@ -43,6 +43,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    @Transactional
     public TodoResponse updateTodo(Todo todo) {
         if (Objects.isNull(todo)) throw new NoTodoDataException(ExceptionMessage.NO_TODO_DATA.getMessage());
         return todoMapper.todoToTodoResponse(todoRepository.save(todo));
