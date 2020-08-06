@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,7 +41,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public void updateTodo(Todo todo) {
-
+    public TodoResponse updateTodo(Todo todo) {
+        return todoMapper.todoToTodoResponse(todoRepository.save(todo));
     }
 }
