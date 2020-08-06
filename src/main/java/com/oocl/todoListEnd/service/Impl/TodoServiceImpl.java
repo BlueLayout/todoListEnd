@@ -1,5 +1,7 @@
 package com.oocl.todoListEnd.service.Impl;
 
+import com.oocl.todoListEnd.constant.ExceptionMessage;
+import com.oocl.todoListEnd.exception.NoTodoDataException;
 import com.oocl.todoListEnd.mapper.TodoMapper;
 import com.oocl.todoListEnd.model.dto.TodoResponse;
 import com.oocl.todoListEnd.model.entity.Todo;
@@ -42,6 +44,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoResponse updateTodo(Todo todo) {
+        if (Objects.isNull(todo)) throw new NoTodoDataException(ExceptionMessage.NO_TODO_DATA.getMessage());
         return todoMapper.todoToTodoResponse(todoRepository.save(todo));
     }
 }
