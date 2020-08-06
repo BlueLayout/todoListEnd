@@ -11,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.transaction.Transactional;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -39,5 +37,17 @@ public class TodoServiceTest {
 
         //then
         assertNotNull(todoResponse);
+    }
+
+    @Test
+    void should_return_void_when_delete_todo_given_id() {
+        //given
+        String id = "11111";
+
+        //when
+        todoService.deleteTodo(id);
+
+        //then
+        verify(todoRepository,times(1)).deleteById(any());
     }
 }
