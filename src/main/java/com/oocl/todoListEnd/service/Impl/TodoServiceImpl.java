@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -29,5 +31,11 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     public void deleteTodo(String id) {
         todoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TodoResponse> queryTodos() {
+        return todoRepository.findAll().stream()
+                .map(todo -> todoMapper.todoToTodoResponse(todo)).collect(Collectors.toList());
     }
 }
