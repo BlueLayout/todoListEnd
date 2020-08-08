@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -67,9 +69,10 @@ public class TodoServiceTest {
     @Test
     void should_return_todo_when_update_todo_given_todo() {
         //given
-        when(todoRepository.save(any())).thenReturn(any());
+        when(todoRepository.findById(anyString())).thenReturn(Optional.of(new Todo()));
+        when(todoRepository.save(isA(Todo.class))).thenReturn(isA(Todo.class));
         //when
-        todoService.updateTodo(new Todo());
+        todoService.updateTodo("1", new Todo());
         //then
         verify(todoRepository,times(1)).save(isA(Todo.class));
     }
@@ -77,11 +80,10 @@ public class TodoServiceTest {
     @Test
     void should_throw_NoTodoDataException_when_update_todo_given_null() {
         //given
-        when(todoRepository.save(any())).thenReturn(any());
         //when
         Throwable exception = assertThrows(NoTodoDataException.class,
-                ()->todoService.updateTodo(null));
+                () -> todoService.updateTodo("1", null));
         //then
-        assertEquals(ExceptionMessage.NO_TODO_DATA.getMessage(),exception.getMessage());
+        assertEquals(ExceptionMessage.NO_SUCH_TODO_DATA.getMessage(), exception.getMessage());
     }
 }

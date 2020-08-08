@@ -13,5 +13,5 @@ public interface TodoService {
 
     List<TodoResponse> queryTodos();
 
-    TodoResponse updateTodo(Todo todo);
+    TodoResponse updateTodo(String id, Todo todo);
 }

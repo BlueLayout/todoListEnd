@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
+@CrossOrigin
 public class TodoController {
 
     @Autowired
@@ -32,8 +33,8 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public TodoResponse updateTodo(@RequestBody TodoRequest todoRequest) {
-        return todoService.updateTodo(todoMapper.todoRequestToTodo(todoRequest));
+    public TodoResponse updateTodo(@PathVariable String id, @RequestBody TodoRequest todoRequest) {
+        return todoService.updateTodo(id, todoMapper.todoRequestToTodo(todoRequest));
     }
 
     @DeleteMapping("/{id}")

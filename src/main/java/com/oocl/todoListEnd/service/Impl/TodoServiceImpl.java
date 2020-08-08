@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,8 +43,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     @Transactional
-    public TodoResponse updateTodo(Todo todo) {
-        if (Objects.isNull(todo)) throw new NoTodoDataException(ExceptionMessage.NO_TODO_DATA.getMessage());
+    public TodoResponse updateTodo(String id, Todo todo) {
+        todoRepository.findById(id).orElseThrow(() -> new NoTodoDataException(ExceptionMessage.NO_SUCH_TODO_DATA.getMessage()));
         return todoMapper.todoToTodoResponse(todoRepository.save(todo));
     }
 }
