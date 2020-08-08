@@ -13,9 +13,5 @@ public interface TodoMapper {
 
     TodoResponse todoToTodoResponse(Todo todo);
 
-    Todo todoResponseToTodo(TodoResponse todoResponse);
-
-    TodoRequest todoToTodoRequest(Todo todo);
-
     Todo todoRequestToTodo(TodoRequest todoRequest);
 }
